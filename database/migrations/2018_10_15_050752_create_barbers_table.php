@@ -13,13 +13,14 @@ class CreateBarbersTable extends Migration
      */
     public function up()
     {
-        Schema::table('barbers', function (Blueprint $table) {
-			  $table->uuid('id');
-			  $table->string('name');
-			  $table->string('address');
-			  $table->string('email')->unique();
-			  $table->string('Phone');
-			  $table->tinyInteger('ast')->unsigned()->default(30);
+        Schema::create('barbers', function (Blueprint $table) {
+            $table->increments('id');
+			  	$table->string('name');
+			  	$table->string('address');
+			  	$table->string('email')->unique();
+			  	$table->string('Phone');
+			  	$table->tinyInteger('ast')->unsigned()->default(30);
+			   $table->timestamps();
         });
     }
 
@@ -30,8 +31,6 @@ class CreateBarbersTable extends Migration
      */
     public function down()
     {
-        Schema::table('barbers', function (Blueprint $table) {
-			  Schema::dropIfExists('barbers');
-        });
+        Schema::dropIfExists('barbers');
     }
 }
