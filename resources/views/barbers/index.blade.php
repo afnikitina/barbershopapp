@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Our Barbers')
+
 @section('content')
     <h1>Meet Our Barbers</h1>
 
