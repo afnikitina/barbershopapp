@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="barber">
+    <div class="create-barber-form" style="font-size:1.2em;font-weight:bolder;">
     <div class="row justify-content-md-center">
         <h1>Add a New Barber</h1>
     </div>
@@ -58,7 +58,7 @@
                 {!! Form::number('ast', null,
                     [
                         'class' => 'form-control',
-                        'placeholder' => 'Example: 25 (no other characters please)'
+                        'placeholder' => 'Example: 25 (just number, no other characters are allowed)'
                     ])
                 !!}
             </div>
