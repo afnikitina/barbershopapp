@@ -12,4 +12,8 @@ class BarbersController extends Controller
 
     	return view('barbers.index')->with('barbers', $barbers);
 	 }
+
+	 public function show($id) {
+    	return view('barbers.show')->with('id', $id);
+	 }
 }
