@@ -18,4 +18,8 @@ class BarbersController extends Controller
     	$barber = DB::table('barbers')->find($id);
     	return view('barbers.show')->with('barber', $barber);
 	 }
+
+	 public function create() {
+    	return veiw('barbers.create');
+	 }
 }
