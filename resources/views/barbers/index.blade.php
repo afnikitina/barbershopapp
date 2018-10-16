@@ -9,9 +9,10 @@
 
     <ul>
         @forelse ($barbers as $barber)
-            <li><a href="/barbers/{{ $barber->id}}">{{ $barber->name }}</a></li>
+            <li><a href="{{ action('BarbersController@show', [$barber->id]) }}">{{ $barber->name }}</a></li>
         @empty
             <li>No barbers are registered in our database.</li>
         @endforelse
     </ul>
 @endsection
+

@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Barber;
 
 class BarbersController extends Controller
 {
     public function index() {
-    	$barbers = Barber::all();
+    	$barbers = DB::table('barbers')->get();
 
     	return view('barbers.index')->with('barbers', $barbers);
 	 }
 
 	 public function show($id) {
-    	return view('barbers.show')->with('id', $id);
+    	$barber = DB::table('barbers')->find($id);
+    	return view('barbers.show')->with('barber', $barber);
 	 }
 }
