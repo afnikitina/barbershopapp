@@ -16,7 +16,7 @@ Route::get('/', 'WelcomeController@index')->name('welcome.index');
 
 Route::get('barbers', 'BarbersController@index')->name('barbers.index');
 Route::get('barbers/{id}', 'BarbersController@show')->name('barbers.show');
-Route::get('barbers/create', 'BarbersController@create')->name('barbers.create');
+Route::get('barbers/forms/create', 'BarbersController@create')->name('barbers.forms.create');
 
 Route::get('queue', 'QueueController@index')->name('queue.index');
 
