@@ -14,10 +14,12 @@
 
 Route::get('/', 'WelcomeController@index')->name('welcome.index');
 
-Route::get('barbers', 'BarbersController@index')->name('barbers.index');
+Route::resource('barbers', 'BarbersController');
+
+/*Route::get('barbers', 'BarbersController@index')->name('barbers.index');
 Route::get('barbers/create', 'BarbersController@create')->name('barbers.create');
 Route::get('barbers/{id}', 'BarbersController@show')->name('barbers.show');
-Route::post('barbers', 'BarbersController@store');
+Route::post('barbers', 'BarbersController@store');*/
 
 Route::get('queue', 'QueueController@index')->name('queue.index');
 
