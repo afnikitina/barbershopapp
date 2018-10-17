@@ -27,7 +27,7 @@ class AddNewBarberRequest extends FormRequest
 			  'name' => 'required',
 			  'address' => 'required',
 			  'email' => 'required|regex:/^.+@.+$/i',
-			  'phone' => 'required|regex:[0-9]{3}(-)?[0-9]{3}(-)?[0-9]{4}',
+			  'phone' => 'required|regex:/^[0-9]{3}(-)?[0-9]{3}(-)?[0-9]{4}$/',
 			  'ast' => 'required|integer'
         ];
     }

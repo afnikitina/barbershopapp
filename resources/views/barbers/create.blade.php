@@ -69,5 +69,17 @@
         </div>
     </div>
     {!! Form::close() !!}
+        <div class="row justify-content-md-center">
+            <div class="form-group col-md-6">
+                @if ($errors->any())
+                    <ul class="alert alert-danger pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+        </div>
     </div>
+
 @endsection
