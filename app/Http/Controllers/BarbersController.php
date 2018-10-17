@@ -38,7 +38,7 @@ class BarbersController extends Controller
     	return view('barbers.edit')->with('barber', $barber);
 	 }
 
-	 public function update($id, BarberRequest $request) {
+	public function update($id, BarberRequest $request) {
     	$barber = Barber::findOrFail($id);
     	$barber->update($request->all());
 
