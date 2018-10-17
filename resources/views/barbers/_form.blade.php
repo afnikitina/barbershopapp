@@ -55,6 +55,6 @@
 </div>
 <div class="row justify-content-md-center">
     <div class="form-group col-md-6">
-        {!! Form::submit('Add Barber', ['class' => 'btn btn-primary form-control']) !!}
+        {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
     </div>
 </div>
