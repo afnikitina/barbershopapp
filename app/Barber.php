@@ -13,4 +13,12 @@ class Barber extends Model
 		 'phone',
 		 'ast'
 	 ];
+
+	/**
+	 * A profile is owned by a user
+	 * @return mixed
+	 */
+	public function user() {
+    	return $this->belongTo('App\User');
+	 }
 }
