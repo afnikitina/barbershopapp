@@ -20,6 +20,6 @@ class BarbersController extends Controller
 	 }
 
 	 public function create() {
-    	return view('barbers.forms.create');
+    	return view('barbers.create');
 	 }
 }

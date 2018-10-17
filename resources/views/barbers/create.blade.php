@@ -6,7 +6,7 @@
         <h1>Add a New Barber</h1>
     </div>
     <div class="form-grop">
-    {!! Form::open(['route' => 'barbers.forms.create'], ['class' => 'form']) !!}
+    {!! Form::open(['route' => 'barbers.create'], ['class' => 'form']) !!}
         <div class="row justify-content-md-center">
             <div class="form-group col-md-6">
                 {!! Form::label('name', 'Full Name', ['class' => 'control-label']) !!}
