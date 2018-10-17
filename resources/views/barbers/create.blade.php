@@ -2,82 +2,17 @@
 
 @section('content')
     <div class="create-barber-form" style="font-size:1.2em;font-weight:bolder;">
-    <div class="row justify-content-md-center">
-        <h1>Add a New Barber</h1>
-    </div>
-    <div class="form-grop">
-    {!! Form::open(['url' => 'barbers'], ['class' => 'form']) !!}
         <div class="row justify-content-md-center">
-            <div class="form-group col-md-6">
-                {!! Form::label('name', 'Full Name', ['class' => 'control-label']) !!}
-                {!! Form::text('name', null,
-                    [
-                        'class' => 'form-control',
-                        'placeholder' => 'Enter Full Name'
-                    ])
-                !!}
-            </div>
+            <h1>Add a New Barber</h1>
         </div>
-        <div class="row justify-content-md-center">
-            <div class="form-group col-md-6">
-                {!! Form::label('address', 'Address', ['class' => 'control-label']) !!}
-                {!! Form::text('address', null,
-                    [
-                        'class' => 'form-control',
-                        'placeholder' => 'Enter Address'
-                    ])
-                !!}
-            </div>
-        </div>
-        <div class="row justify-content-md-center">
-            <div class="form-group col-md-6">
-                {!! Form::label('email', 'Email Address', ['class' => 'control-label']) !!}
-                {!! Form::email('email', null,
-                    [
-                        'class' => 'form-control',
-                        'placeholder' => 'Example: example@gmail.com'
-                    ])
-                !!}
-            </div>
-        </div>
-        <div class="row justify-content-md-center">
-            <div class="form-group col-md-6">
-                {!! Form::label('phone', 'Phone Number', ['class' => 'control-label']) !!}
-                {!! Form::text('phone', null,
-                    [
-                        'class' => 'form-control',
-                        'placeholder' => 'Example: 123-456-7890'
-                    ])
-                !!}
-            </div>
-        </div>
-        <div class="row justify-content-md-center">
-            <div class="form-group col-md-6">
-                {!! Form::label('ast', 'Average Service Time (min)', ['class' => 'control-label']) !!}
-                {!! Form::number('ast', null,
-                    [
-                        'class' => 'form-control',
-                        'placeholder' => 'Example: 25 (just number, no other characters are allowed)'
-                    ])
-                !!}
-            </div>
-        </div>
-        <div class="row justify-content-md-center">
-            <div class="form-group col-md-6">
-                {!! Form::submit('Add Barber', ['class' => 'btn btn-primary form-control']) !!}
-            </div>
-        </div>
-    </div>
-    {!! Form::close() !!}
-        <div class="row justify-content-md-center">
-            <div class="form-group col-md-6">
-                @if ($errors->any())
-                    <ul class="alert alert-danger pl-5">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                @endif
+        <div class="form-grop">
+        {!! Form::open(['url' => 'barbers'], ['class' => 'form']) !!}
+            @include('barbers._form', ['submitButtonText' => 'Create Profile'])
+        {!! Form::close() !!}
+            <div class="row justify-content-md-center">
+                <div class="form-group col-md-6">
+                    @include('errors.list')
+                </div>
             </div>
         </div>
     </div>
