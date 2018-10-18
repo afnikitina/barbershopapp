@@ -6,5 +6,7 @@ use Illuminate\Http\Request;
 
 class WalkinController extends Controller
 {
-    //
+	public function create() {
+		return view('walkins.create');
+	}
 }

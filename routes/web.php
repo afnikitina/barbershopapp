@@ -28,3 +28,5 @@ Route::view('contact', 'contact.index')->name('contact.index');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('walkins/create', 'WalkinController@create')->name('walkins.create');
