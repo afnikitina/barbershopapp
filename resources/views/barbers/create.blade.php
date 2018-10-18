@@ -3,7 +3,7 @@
 @section('content')
     <div class="create-barber-form" style="font-size:1.2em;font-weight:bolder;">
         <div class="row justify-content-md-center">
-            <h1>Add a New Barber</h1>
+            <h1>Please Create Your Profile</h1>
         </div>
         <div class="form-grop">
         {!! Form::open(['url' => 'barbers'], ['class' => 'form']) !!}

@@ -44,17 +44,6 @@
 </div>
 <div class="row justify-content-md-center">
     <div class="form-group col-md-6">
-        {!! Form::label('ast', 'Average Service Time (min)', ['class' => 'control-label']) !!}
-        {!! Form::number('ast', null,
-            [
-                'class' => 'form-control',
-                'placeholder' => 'Example: 25 (just number, no other characters are allowed)'
-            ])
-        !!}
-    </div>
-</div>
-<div class="row justify-content-md-center">
-    <div class="form-group col-md-6">
         {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
     </div>
 </div>
