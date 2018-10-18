@@ -25,3 +25,6 @@ Route::get('queue', 'QueueController@index')->name('queue.index');
 
 Route::view('about', 'about.index')->name('about.index');
 Route::view('contact', 'contact.index')->name('contact.index');
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');

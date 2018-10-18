@@ -26,8 +26,11 @@ class BarbersController extends Controller
 	 }
 
 	 public function store(BarberRequest $request) {
+//    	Auth::user();
 		 $barber= new Barber($request->all());
-		 $barber->save();
+
+		 Auth::user()->barbers()->save($barber);
+		 //$barber->save();
 
 		 return redirect('barbers');
 	 }

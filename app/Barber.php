@@ -19,6 +19,6 @@ class Barber extends Model
 	 * @return mixed
 	 */
 	public function user() {
-    	return $this->belongTo('App\User');
+    	return $this->belongsTo('App\User');
 	 }
 }
