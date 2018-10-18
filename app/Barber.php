@@ -11,7 +11,6 @@ class Barber extends Model
 		 'address',
 		 'email',
 		 'phone',
-		 'ast'
 	 ];
 
 	/**
