@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BarberRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Barber;
+
 
 class BarbersController extends Controller
 {
@@ -18,7 +20,7 @@ class BarbersController extends Controller
 
 	 public function show($id) {
 		 $barber = Barber::find($id);
-    	return view('barbers.show')->with('barber', $barber);
+		 return view('barbers.show')->with('barber', $barber);
 	 }
 
 	 public function create() {
@@ -26,12 +28,11 @@ class BarbersController extends Controller
 	 }
 
 	 public function store(BarberRequest $request) {
-//    	Auth::user();
-		 $barber= new Barber($request->all());
-
-		 Auth::user()->barbers()->save($barber);
-		 //$barber->save();
-
+		 if (Auth::check()) {
+			 $barber= new Barber($request->all());
+			 $barber->user_id = Auth::user()->getAuthIdentifier();
+			 $barber->save();
+		 }
 		 return redirect('barbers');
 	 }
 
