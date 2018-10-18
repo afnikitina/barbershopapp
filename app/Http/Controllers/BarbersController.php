@@ -19,7 +19,7 @@ class BarbersController extends Controller
 	 }
 
 	 public function show($id) {
-		 $barber = Barber::find($id);
+		 $barber = Barber::findOrFail($id);
 		 return view('barbers.show')->with('barber', $barber);
 	 }
 
