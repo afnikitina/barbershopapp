@@ -28,7 +28,6 @@ class BarberRequest extends FormRequest
 			  'address' => 'required',
 			  'email' => 'required|regex:/^.+@.+$/i',
 			  'phone' => 'required|regex:/^[0-9]{3}(-)?[0-9]{3}(-)?[0-9]{4}$/',
-			  'ast' => 'required|integer'
         ];
     }
 }
