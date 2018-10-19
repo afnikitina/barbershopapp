@@ -7,7 +7,13 @@
         </div>
         <div class="form-grop">
         {!! Form::open(['url' => 'barbers'], ['class' => 'form']) !!}
-            @include('barbers._form', ['submitButtonText' => 'Create Profile'])
+            @include('barbers._form', [
+                'submitButtonText' => 'Create Profile',
+                'valName' => null,
+                'valAddress' => null,
+                'valEmail' => null,
+                'valPhone' => null
+            ])
         {!! Form::close() !!}
             <div class="row justify-content-md-center">
                 <div class="form-group col-md-6">

@@ -1,7 +1,7 @@
 <div class="row justify-content-md-center">
     <div class="form-group col-md-6">
         {!! Form::label('name', 'Full Name', ['class' => 'control-label']) !!}
-        {!! Form::text('name', null,
+        {!! Form::text('name', $valName,
             [
                 'class' => 'form-control',
                 'placeholder' => 'Enter Full Name'
@@ -12,7 +12,7 @@
 <div class="row justify-content-md-center">
     <div class="form-group col-md-6">
         {!! Form::label('address', 'Address', ['class' => 'control-label']) !!}
-        {!! Form::text('address', null,
+        {!! Form::text('address', $valAddress,
             [
                 'class' => 'form-control',
                 'placeholder' => 'Enter Address'
@@ -23,7 +23,7 @@
 <div class="row justify-content-md-center">
     <div class="form-group col-md-6">
         {!! Form::label('email', 'Email Address', ['class' => 'control-label']) !!}
-        {!! Form::email('email', null,
+        {!! Form::email('email', $valEmail,
             [
                 'class' => 'form-control',
                 'placeholder' => 'Example: example@gmail.com'
@@ -34,7 +34,7 @@
 <div class="row justify-content-md-center">
     <div class="form-group col-md-6">
         {!! Form::label('phone', 'Phone Number', ['class' => 'control-label']) !!}
-        {!! Form::text('phone', null,
+        {!! Form::text('phone', $valPhone,
             [
                 'class' => 'form-control',
                 'placeholder' => 'Example: 123-456-7890'
