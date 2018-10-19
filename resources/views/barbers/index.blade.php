@@ -3,18 +3,21 @@
 @section('title', 'Our Barbers')
 
 @section('content')
-    <h1>Meet Our Barbers</h1>
-
-    <div>
-        <a href="{{ route('barbers.show', ['id' => 2]) }}">Employee of the Month</a>
+    <div class="row justify-content-md-center">
+        <div class="form-group col-md-6">
+    <h1>Our Barbers</h1>
+        </div>
     </div>
-
-    <ul>
-        @forelse ($barbers as $barber)
-            <li><a href="{{ action('BarbersController@show', [$barber->id]) }}">{{ $barber->name }}</a></li>
-        @empty
-            <li>No barbers are registered in our database.</li>
-        @endforelse
-    </ul>
+    <div class="row justify-content-md-center">
+        <div class="form-group col-md-6">
+            <ul>
+                @forelse ($barbers as $barber)
+                    <li><a href="{{ action('BarbersController@show', [$barber->id]) }}"><h3>{{ $barber->name }}</h3></a></li>
+                @empty
+                    <li><h3>No barbers are registered in our database.</h3></li>
+                @endforelse
+            </ul>
+        </div>
+    </div>
 @endsection
 

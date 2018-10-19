@@ -14,7 +14,7 @@ class BarbersController extends Controller
 {
     public function index() {
     	/*$barbers = DB::table('barbers')->latest('created_at')->get();*/
-		 $barbers = Barber::latest('created_at')->get();
+		$barbers = Barber::latest('created_at')->get();
 
     	return view('barbers.index')->with('barbers', $barbers);
 	 }

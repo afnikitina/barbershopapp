@@ -75,9 +75,9 @@
         <main class="container mt-5 py-4">
 
             @if (Session::has('message'))
-                <div class="row justify-content-md-center p-5">
+                <div class="row justify-content-md-center">
                     <div class="form-group col-md-6">
-                        <div class="aler alert-success">
+                        <div class="aler alert-success p-3">
                             {{ Session::get('message') }}
                         </div>
                     </div>
