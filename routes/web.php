@@ -31,3 +31,7 @@ Auth::routes();
 Route::get('walkins', 'WalkinController@index')->name('walkins.index');
 Route::get('walkins/create', 'WalkinController@create')->name('walkins.create');
 Route::post('walkins', 'WalkinController@store');
+
+Route::get('worklog', 'WorklogController@index')->name('worklog.index');
+Route::get('worklog/create', 'WorklogController@create')->name('worklog.create');
+Route::post('worklog', 'WorklogController@startService');
