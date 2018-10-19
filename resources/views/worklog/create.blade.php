@@ -9,6 +9,17 @@
             {!! Form::open(['url' => 'worklog'], ['class' => 'form']) !!}
             <div class="row justify-content-md-center">
                 <div class="form-group col-md-6">
+                    {!! Form::label('email', 'Barber', ['class' => 'control-label']) !!}
+                    {!! Form::text('name', null,
+                        [
+                            'class' => 'form-control',
+                            'placeholder' => 'Please enter your login email'
+                        ])
+                    !!}
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="form-group col-md-6">
                     {!! Form::submit('Next Customer', ['class' => 'btn btn-primary form-control']) !!}
                 </div>
             </div>

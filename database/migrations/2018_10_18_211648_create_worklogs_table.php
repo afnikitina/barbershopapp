@@ -15,7 +15,7 @@ class CreateWorklogsTable extends Migration
     {
         Schema::create('worklogs', function (Blueprint $table) {
             $table->increments('id');
-			   $table->integer('user_id')->unsigned()->nullable();
+            $table->string('name');
 			   $table->integer('walkin_id')->unsigned()->nullable();
             $table->tinyInteger('service_time')->default(20);
             $table->timestamps();
