@@ -21,8 +21,6 @@ Route::get('barbers/create', 'BarbersController@create')->name('barbers.create')
 Route::get('barbers/{id}', 'BarbersController@show')->name('barbers.show');
 Route::post('barbers', 'BarbersController@store');*/
 
-Route::get('queue', 'QueueController@index')->name('queue.index');
-
 Route::view('about', 'about.index')->name('about.index');
 Route::view('contact', 'contact.index')->name('contact.index');
 
