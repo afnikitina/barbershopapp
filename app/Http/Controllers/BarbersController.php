@@ -19,7 +19,12 @@ class BarbersController extends Controller
 	 }
 
 	 public function show($id) {
-		 $barber = Barber::findOrFail($id);
+		 $barber = DB::table('barbers')->where('id', $id)->get();
+
+		 if (is_object($barber)) {
+		 	$barber =  $barber[0];
+		 }
+
 		 return view('barbers.show')->with('barber', $barber);
 	 }
 
@@ -37,13 +42,22 @@ class BarbersController extends Controller
 	 }
 
 	 public function edit($id) {
-    	$barber = Barber::findOrFail($id);
+    	$barber = DB::table('barbers')->where('id', $id)->get();
+
+    	if (is_object($barber)) {
+			$barber =  $barber[0];
+		}
 
     	return view('barbers.edit')->with('barber', $barber);
 	 }
 
 	public function update($id, BarberRequest $request) {
-    	$barber = Barber::findOrFail($id);
+    	$barber = DB::table('barbers')->where('id', $id)->get();
+
+    	if (is_object($barber)) {
+			$barber =  $barber[0];
+    	}
+
     	$barber->update($request->all());
 
     	return redirect('barbers');
