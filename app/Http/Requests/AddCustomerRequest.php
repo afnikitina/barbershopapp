@@ -25,6 +25,7 @@ class AddCustomerRequest extends FormRequest
     {
         return [
 			  'name' => 'required|min:2',
+			  'service' => 'required',
         ];
     }
 }

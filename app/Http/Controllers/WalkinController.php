@@ -14,10 +14,16 @@ class WalkinController extends Controller
 		return view('walkins.create');
 	}
 
+	/**
+	 * save the user input data + additional calculated field into the 'walkins' table
+	 * @param AddCustomerRequest $request
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
 	public function store(AddCustomerRequest $request) {
 		$walkin = new Walkin($request->all());
+		$walkin->setServiceTimeAttribute();
 		$walkin->save();
 
-		return redirect('walkins');
+		return redirect('about');
 	}
 }

@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Walkin extends Model
 {
     protected $fillable = [
-		 'name'
+		 'name',
+		 'service'
 	 ];
 
+
 	/**
-	 * We are going to save the service time into the database
-	 * @param $value (selected value of the dropdown list)
+	 * we create an additional attribute based on the 'service' value
 	 */
-	public function setServiceTimeAttribute($value) {
+	public function setServiceTimeAttribute() {
     	$services = [
 			'tr_cut' => 20,
 			'sp_cut' => 25,
@@ -24,6 +25,6 @@ class Walkin extends Model
 			'cut_shave' => 35
 		];
 
-    	$this->attributes['service_time'] = $services[$value];
+    	$this->attributes['service_time'] = (int)$services[$this->attributes['service']];
 	 }
 }

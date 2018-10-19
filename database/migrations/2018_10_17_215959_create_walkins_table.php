@@ -16,7 +16,8 @@ class CreateWalkinsTable extends Migration
         Schema::create('walkins', function (Blueprint $table) {
         	  $table->increments('id');
 			  $table->string('name', 100);
-			  $table->tinyInteger('service_time')->unsigned();
+			  $table->string('service');
+			  $table->tinyInteger('service_time')->default(20);
 			  $table->timestamps();
         });
     }

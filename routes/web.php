@@ -30,4 +30,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('walkins/create', 'WalkinController@create')->name('walkins.create');
-Route::post('walkins', 'WalkinController@store')->name('walkins');;
+Route::post('walkins', 'WalkinController@store');
