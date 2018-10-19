@@ -31,10 +31,20 @@
                         ], null, ['class' => 'form-control', 'placeholder' => 'Choose Service Type']) !!}
                 </div>
             </div>
-            {!! Form::close() !!}
             <div class="row justify-content-md-center">
                 <div class="form-group col-md-6">
+                    {!! Form::submit('Submit', ['class' => 'btn btn-primary form-control']) !!}
+                </div>
+            </div>
+            {!! Form::close() !!}
+            <div class="row justify-content-md-center">
+                <div class="col-md-6">
                     @include('errors.list')
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="alert alert-success col-md-6">
+                    <p>Your estimate waiting time is 50 minutes</p>
                 </div>
             </div>
         </div>
