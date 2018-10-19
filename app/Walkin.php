@@ -10,11 +10,6 @@ class Walkin extends Model
 		 'name'
 	 ];
 
-    // convert this field value to the Carbon instance
-	protected $dates = [
-		'signed_at'
-	];
-
 	/**
 	 * We are going to save the service time into the database
 	 * @param $value (selected value of the dropdown list)

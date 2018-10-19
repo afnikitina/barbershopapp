@@ -24,8 +24,7 @@ class AddCustomerRequest extends FormRequest
     public function rules()
     {
         return [
-			  'name' => 'required',
-			  'service_time' => 'required'
+			  'name' => 'required|min:2',
         ];
     }
 }

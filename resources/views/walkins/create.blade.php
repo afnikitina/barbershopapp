@@ -20,7 +20,7 @@
             </div>
             <div class="row justify-content-md-center">
                 <div class="form-group col-md-6">
-                    {!! Form::label('service', 'Service Type', ['class' => 'control-label']) !!}
+                    {!! Form::label('service', 'Choose Service Type', ['class' => 'control-label']) !!}
                     {!!  Form::select('service', [
 	                    'tr_cut' => 'Traditional Haircut',
 	                    'sp_cut' => 'Specialty Haircut',
@@ -28,7 +28,7 @@
 	                    'shave' => 'Full Shave',
 	                    'cut_beard' => 'Haircut and Beard Edge-up',
                         'cut_shave' => 'Haircut and Full Shave',
-                        ], null, ['class' => 'form-control', 'placeholder' => 'Choose Service Type']) !!}
+                        ], null, ['class' => 'form-control']) !!}
                 </div>
             </div>
             <div class="row justify-content-md-center">
