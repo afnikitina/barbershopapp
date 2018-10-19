@@ -19,7 +19,7 @@ class CreateBarbersTable extends Migration
 			  	$table->string('name');
 			  	$table->string('address');
 			  	$table->string('email')->unique();
-			  	$table->string('Phone');
+			  	$table->string('phone');
 			   $table->timestamps();
 
 			   $table->foreign('user_id')
