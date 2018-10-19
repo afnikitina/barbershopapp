@@ -22,12 +22,12 @@
                 <div class="form-group col-md-6">
                     {!! Form::label('service', 'Choose Service Type', ['class' => 'control-label']) !!}
                     {!!  Form::select('service', [
-	                    'tr_cut' => 'Traditional Haircut',
-	                    'sp_cut' => 'Specialty Haircut',
-	                    'beard' => 'Beard Edge-up',
-	                    'shave' => 'Full Shave',
-	                    'cut_beard' => 'Haircut and Beard Edge-up',
-                        'cut_shave' => 'Haircut and Full Shave',
+	                    'Traditional Haircut' => 'Traditional Haircut',
+	                    'Specialty Haircut' => 'Specialty Haircut',
+	                    'Beard Edge-up' => 'Beard Edge-up',
+	                    'Full Shave' => 'Full Shave',
+	                    'Haircut and Beard Edge-up' => 'Haircut and Beard Edge-up',
+                        'Haircut and Full Shave' => 'Haircut and Full Shave',
                         ], null, ['class' => 'form-control']) !!}
                 </div>
             </div>

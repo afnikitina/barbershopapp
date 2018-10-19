@@ -17,12 +17,12 @@ class Walkin extends Model
 	 */
 	public function setServiceTimeAttribute() {
     	$services = [
-			'tr_cut' => 20,
-			'sp_cut' => 25,
-			'beard' => 10,
-			'shave' => 15,
-			'cut_beard' => 30,
-			'cut_shave' => 35
+			'Traditional Haircut' => 20,
+			'Specialty Haircut' => 25,
+			'Beard Edge-up' => 10,
+			'Full Shave' => 15,
+			'Haircut and Beard Edge-up' => 30,
+			'Haircut and Full Shave' => 35
 		];
 
     	$this->attributes['service_time'] = (int)$services[$this->attributes['service']];

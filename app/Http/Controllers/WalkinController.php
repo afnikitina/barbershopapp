@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class WalkinController extends Controller
 {
+	public function index() {
+		return view('walkins.index');
+	}
+
 	public function create() {
 		return view('walkins.create');
 	}
@@ -24,6 +28,6 @@ class WalkinController extends Controller
 		$walkin->setServiceTimeAttribute();
 		$walkin->save();
 
-		return redirect('about');
+		return redirect('walkins');
 	}
 }
