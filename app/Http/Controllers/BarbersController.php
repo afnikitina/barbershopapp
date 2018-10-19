@@ -39,7 +39,7 @@ class BarbersController extends Controller
 			 $barber->user_id = Auth::user()->getAuthIdentifier();
 			 $barber->save();
 
-			 Session::flash('message', 'Your profile has been created');
+			 Session::flash('message', 'Your profile has been created.');
 		 }
 		 
 		 return redirect('barbers');
@@ -63,6 +63,8 @@ class BarbersController extends Controller
     	}
 
     	$barber->update($request->all());
+
+    	Session::flash('message', 'Your profile has been updated.');
 
     	return redirect('barbers');
 	 }
