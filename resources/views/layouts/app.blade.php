@@ -69,6 +69,12 @@
                                     </form>
                                 </div>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('barbers.edit', ['id' => Auth::user()->id]) }}">Edit Your Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('worklog.create') }}">Take Next Customer</a>
+                            </li>
                         @endguest
                     </ul>
                 </div>

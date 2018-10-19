@@ -56,13 +56,19 @@ class BarbersController extends Controller
 	 }
 
 	public function update($id, BarberRequest $request) {
-    	$barber = DB::table('barbers')->where('id', $id)->get();
-
+    	$barber = DB::table('barbers')->where('id', $id)->first();
+/*
     	if (is_object($barber)) {
 			$barber =  $barber[0];
-    	}
+$barber->update($request->all());
+    	}*/
 
-    	$barber->update($request->all());
+		$barberNew= new Barber($request->all());
+		$barber->name = $barberNew->name;
+		$barber->address = $barberNew->address;
+		$barber->email = $barberNew->email;
+		$barber->phone = $barberNew->phone;
+		$barber->update();
 
     	Session::flash('message', 'Your profile has been updated.');
 
