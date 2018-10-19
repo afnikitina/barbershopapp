@@ -20,19 +20,20 @@ class WalkinController extends Controller
 		return view('walkins.create');
 	}
 
-
-
-	// modify!!!
-	function findMinAndReplace(array $arr1, array $arr2) {
-		$min = min($arr1);
-		$index = array_search($min, $arr1);
-		$arr1[$index] += $arr2[$index];
-		return $arr1;
+	/**
+	 * This is a helper function to find a minimum value in the array,
+	 * replace this value with a sum of it and a value of the second argument and return the minimum
+	 *
+	 * @param $arr
+	 * @param $num
+	 * @return mixed
+	 */
+	function findMinandReplace(&$arr, $num) {
+		$min = min($arr);
+		$index = array_search($min, $arr);
+		$arr[$index] += $num;
+		return $min;
 	}
-
-
-
-
 
 	public function calculateWaitingTime() {
 		// EOB (7 pm)
@@ -44,7 +45,7 @@ class WalkinController extends Controller
 		// find out how many barbers are currently working
 		$barbers = DB::table('worklogs')->get();
 
-		// if none are working, return -1 and exit from the function
+		// if none barbers are working, return -1 and exit from the function, waiting time is infinity
 		if (!$barbers) {
 			return -1;
 		}
@@ -59,9 +60,11 @@ class WalkinController extends Controller
 		// get the array of 'walkins' service times
 		$queue = DB::table('workins')->oldest('created_at')->get();
 		$st = [];
-			for ($i = 0; $i < count($queue); $i++ ) {
-				$st[$i] = $queue[$i]['service_time'];
-			}
+		for ($i = 0; $i < count($queue); $i++ ) {
+			$st[$i] = $queue[$i]['service_time'];
+		}
+
+		// calculate the current waiting time
 
 
 
