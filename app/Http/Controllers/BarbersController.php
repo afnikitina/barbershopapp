@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Barber;
+use Illuminate\Support\Facades\Session;
 
 
 class BarbersController extends Controller
@@ -37,7 +38,10 @@ class BarbersController extends Controller
 			 $barber= new Barber($request->all());
 			 $barber->user_id = Auth::user()->getAuthIdentifier();
 			 $barber->save();
+
+			 Session::flash('message', 'Your profile has been created');
 		 }
+		 
 		 return redirect('barbers');
 	 }
 
