@@ -44,7 +44,7 @@
                                 <a class="nav-link" href="{{ route('walkins.create') }}">Walk-in Signup</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('walkins.index') }}">Wait List Management</a>
+                                <a class="nav-link" href="{{ route('walkins.index') }}">Waitlist Management</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
