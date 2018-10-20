@@ -22,30 +22,29 @@ class WorklogController extends Controller
 	}
 
     public function startService(UpdateWorklogRequest $request) {
-		// get all records of the 'walkins' table
-		 $next = DB::table('walkins')->oldest('created_at')->get();
+		 // get the employee id of the currently logged barber
+		 $currBarberId = Barber::find(Auth::user()->id));
 
-		 $currCustomer = Walkin::latest('updated_at')->get();
+		 // get the next in line customer from the 'walkins' table
+		 $nextCustomer = Walkin::latest('updated_at')->get();
 
-		 // get the user input into the instanse of the Worklog class
-		 $record = new Worklog($request->all());
+		 // check if this employee is already in the current worklogs table
+		 $record = Worklog::find($currBarberId)->count() ? Worklog::find($currBarberId) : new Worklog();
 
-		 // check if the record with entered email is already in the current worklogs table:
-		 $extRecord = DB::table('worklogs')->where('email', '=', $record->email)->get();
-		 if ($extRecord) {
-			 DB::table('worklogs')
-				 ->where('email', '=', $record->email)
-				 ->update(['walkin_id' => $next[0]->id,
-					 			'service_time' => $next[0]->service_time]);
-		 }
-		 else {
-			 $record->walkin_id = $next[0]->id;
-			 $record->service_time = $next[0]->service_time;
-			 $record->save();
-		 }
+		 // get the user input
+		 $record->name = $request->input('name');
+
+		 // get all the required data from the walkins table
+		 $record->ticket_id = $nextCustomer->id;
+		 $record->customer_name = $nextCustomer->name;
+		 $record->service_time = $nextCustomer->service_time;
+
+		 $record->save();
 
 		 // delete the first-in-line customer from the queue (walkins table)
-		 DB::table('walkins')->where('created_at', '=', $next[0]->created_at)->delete();
+		 Walkin::find($nextCustomer->id)->delete();
+
+		 // create a flash message
 
 		 return view('worklog.index');
 	 }
