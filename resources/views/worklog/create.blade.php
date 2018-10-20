@@ -9,11 +9,11 @@
             {!! Form::open(['url' => 'worklog'], ['class' => 'form']) !!}
             <div class="row justify-content-md-center">
                 <div class="form-group col-md-6">
-                    {!! Form::label('email', 'Barber', ['class' => 'control-label']) !!}
+                    {!! Form::label('name', 'Barber', ['class' => 'control-label']) !!}
                     {!! Form::text('name', null,
                         [
                             'class' => 'form-control',
-                            'placeholder' => 'Please enter your login email'
+                            'placeholder' => 'Employee Name'
                         ])
                     !!}
                 </div>
@@ -27,11 +27,6 @@
             <div class="row justify-content-md-center">
                 <div class="form-group col-md-6">
                     @include('errors.list')
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="alert alert-success col-md-6">
-                    <p>Your customer needs a haircut</p>
                 </div>
             </div>
         </div>

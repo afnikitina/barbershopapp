@@ -25,6 +25,8 @@ class WorklogController extends Controller
 		// get all records of the 'walkins' table
 		 $next = DB::table('walkins')->oldest('created_at')->get();
 
+		 $currCustomer = Walkin::latest('updated_at')->get();
+
 		 // get the user input into the instanse of the Worklog class
 		 $record = new Worklog($request->all());
 

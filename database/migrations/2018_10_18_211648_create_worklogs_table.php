@@ -14,12 +14,13 @@ class CreateWorklogsTable extends Migration
     public function up()
     {
         Schema::create('worklogs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-			   $table->integer('walkin_id')->unsigned()->nullable();
-            $table->tinyInteger('service_time')->default(20);
-            $table->timestamps();
-        });
+			  $table->increments('id');
+			  $table->string('name');
+			  $table->integer('barber_id')->unsigned()->nullable();
+			  $table->integer('walkin_id')->unsigned()->nullable();
+			  $table->tinyInteger('service_time')->default(20);
+			  $table->timestamps();
+		  });
     }
 
     /**
