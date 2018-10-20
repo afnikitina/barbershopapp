@@ -6,10 +6,7 @@
             <h1>Edit Profile: {!! $barber->name !!}</h1>
         </div>
         <div class="form-grop">
-            {!! Form::model([$barber, 'method' => 'POST', 'action' => ['BarbersController@update', $barber->id], 'class' => 'form']) !!}
-            <input type="hidden" name="_method" value="PUT">
-            {{--@method('PUT')--}}
-            {{--@csrf--}}
+            {!! Form::model($barber, ['route' => ['barbers.update', $barber->id], 'method' => 'PATCH', 'class' => 'form' ]) !!}
             @include('barbers._form', [
                 'submitButtonText' => 'Update Profile',
                 'valName' => old('name', $barber->name),
