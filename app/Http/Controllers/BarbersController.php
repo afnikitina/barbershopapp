@@ -14,7 +14,7 @@ class BarbersController extends Controller
 {
     public function index() {
     	/*$barbers = DB::table('barbers')->latest('created_at')->get();*/
-		$barbers = Barber::latest('created_at')->get();
+		$barbers = Barber::latest('updated_at')->get();
 
     	return view('barbers.index')->with('barbers', $barbers);
 	 }
@@ -36,41 +36,43 @@ class BarbersController extends Controller
 	 public function store(BarberRequest $request) {
 		 if (Auth::check()) {
 			 $barber= new Barber($request->all());
-			 $barber->user_id = Auth::user()->getAuthIdentifier();
+			 /*$barber->user_id = Auth::user()->getAuthIdentifier();*/
+			 $barber->user_id = Auth::user()->id;
+
 			 $barber->save();
 
-			 Session::flash('message', 'Your profile has been created.');
+			 session()->flash('message', 'Your profile has been created.');
 		 }
 		 
 		 return redirect('barbers');
 	 }
 
 	 public function edit($id) {
-    	$barber = DB::table('barbers')->where('id', $id)->get();
+    	//$barber = DB::table('barbers')->where('id', $id)->get();
+		 $barber = Barber::find($id);
 
-    	if (is_object($barber)) {
+    	/*if (is_object($barber)) {
 			$barber =  $barber[0];
-		}
+		}*/
 
     	return view('barbers.edit')->with('barber', $barber);
 	 }
 
 	public function update($id, BarberRequest $request) {
-    	$barber = DB::table('barbers')->where('id', $id)->first();
-/*
-    	if (is_object($barber)) {
-			$barber =  $barber[0];
-$barber->update($request->all());
-    	}*/
+		$barber = Barber::find($id);
 
-		$barberNew= new Barber($request->all());
-		$barber->name = $barberNew->name;
-		$barber->address = $barberNew->address;
-		$barber->email = $barberNew->email;
-		$barber->phone = $barberNew->phone;
-		$barber->update();
+		if ( $barber ) {
+			$barber->name = $request->input('name');
+			$barber->address = $request->input('address');
+			$barber->email = $request->input('email');
+			$barber->phone = $request->input('phone');
 
-    	Session::flash('message', 'Your profile has been updated.');
+			$barber->save();
+
+			session()->flash('message', 'Your profile has been updated.');
+		} else {
+			session()->flash('message', 'Something went wrong! Your profile has not been updated.');
+		}
 
     	return redirect('barbers');
 	 }
