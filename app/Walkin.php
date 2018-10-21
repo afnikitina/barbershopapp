@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Walkin extends Model
 {
     protected $fillable = [
-		 'name',
+		 'customer_name',
 		 'service'
 	 ];
 

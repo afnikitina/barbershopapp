@@ -13,7 +13,7 @@
                     {!! Form::text('name', null,
                         [
                             'class' => 'form-control',
-                            'placeholder' => 'Enter Name'
+                            'placeholder' => 'Enter Your Name'
                         ])
                     !!}
                 </div>
