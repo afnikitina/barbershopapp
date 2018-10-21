@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateWorklogRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +22,8 @@ class WorklogController extends Controller
 
     public function startService(UpdateWorklogRequest $request) {
 		 // get the employee id of the currently logged barber
-		 $currBarberId = Barber::find(Auth::user()->id));
+		 $barber = Barber::find(Auth::user());
+		 $barberId = $barber->id;
 
 		 // check if there is any customers in the waitlist
 		 if (Walkin::all->isEmpty()) {
@@ -34,28 +34,27 @@ class WorklogController extends Controller
 		 $nextCustomer = Walkin::latest('updated_at')->get();
 
 		 // check if this employee is already in the current worklogs table
-		 $record = Worklog::find($currBarberId)->count() ? Worklog::find($currBarberId) : new Worklog();
-
-		 // get the user input
-		 $record->barber_name = $request->input('name');
+		 $record = Worklog::find($barberId)->count() ? Worklog::find($barberId) : new Worklog();
 
 		 // get all the required data from the walkins table
+		 $record->barber_id = $barberId;
 		 $record->ticket_id = $nextCustomer->id;
-		 $record->customer_name = $nextCustomer->customer_name;
 		 $record->service_time = $nextCustomer->service_time;
 
 		 $record->save();
 
-		 // delete the first-in-line customer from the queue (walkins table)
-		 Walkin::find($nextCustomer->id)->delete();
+		 $customerName = $nextCustomer->customer_name;
+		 $barberName = $barber->name;
 
 		 // create a flash message
-		 $flash_message = 'Hi ' .$record->barber_name .'!\n'
-			 .'Your next customer is' .$record->customer_name .'\n'
-			 .$record->customer_name .' needs' .$nextCustomer->service .'\n'
-			 .'Approximate service time is ' .$record->service_time;
+		 $flash_message = 'Hi ' .$barber->name .'!\n'
+			 .'Your next customer, ' .$nextCustomer->customer_name .', needs ' .$nextCustomer->service .'\n'
+			 .'Tne approximate service time is ' .$record->service_time .' minutes';
 
 		 //session()->flash('message', $flash_message);
+
+		 // delete the first-in-line customer from the queue (walkins table)
+		 $nextCustomer->delete();
 
 		 return view('worklog.index')->with([
 		 	'flash_message' => $flash_message ]);
