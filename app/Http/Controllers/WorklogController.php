@@ -20,7 +20,7 @@ class WorklogController extends Controller
 		return view('worklog.create');
 	}
 
-    public function startService(UpdateWorklogRequest $request) {
+    public function startService() {
 		 // get the employee id of the currently logged barber
 		 $barber = Barber::find(Auth::user());
 		 $barberId = $barber->id;
