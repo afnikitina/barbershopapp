@@ -18,6 +18,18 @@ public function findMinAndReplace(&$arr, $num) {
 	return $min;
 }
 
+public function parseTime($tm) {
+	$h = floor($tm / 60);
+	$min = $tm % 60;
+
+	$msg1 = ($h > 0) ? $h .' hour' : '';
+	$msg2 = ($h>1) ? 's' : '';
+	$msg3 = ($min > 0) ? ' ' .$min .' minute' : '';
+	$msg4 = ($min > 1) ? 's' : '';
+
+	return $msg1 .$msg2 .$msg3 .$msg4;
+}
+
 class WalkinController extends Controller
 {
 	public function index() {
@@ -72,7 +84,10 @@ class WalkinController extends Controller
 		for ($i = 0; $i < count($queue); $i++ ) {
 			$waitingTime = findMinAndReplace($st, $waitingTime);
 		}
-		return $waitingTime;
+
+		$flash_message = 'Your estimated waiting time is ' .$parsedTime;
+		return redirect('walkins')->with([
+			'flash_message' => $flash_message ]);
 	}
 
 	/**
