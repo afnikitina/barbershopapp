@@ -86,7 +86,7 @@
 
         <main class="container mt-5 py-4">
 
-            @if (Session::has('message'))
+            @if (Session::has('flash_message'))
                 <div class="row justify-content-md-center">
                     <div class="form-group col-md-6">
                         <div class="aler alert-success p-3">
