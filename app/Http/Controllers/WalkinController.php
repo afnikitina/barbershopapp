@@ -54,12 +54,14 @@ function parseTime($tm) {
 	$h = floor($tm / 60);
 	$min = $tm % 60;
 
-	$msg1 = ($h > 0) ? $h .' hour' : '';
-	$msg2 = ($h > 1) ? 's' : '';
-	$msg3 = ($min > 0) ? ' ' .$min .' minute' : '';
-	$msg4 = ($min > 1) ? 's' : '';
+	$msg = '';
 
-	return $msg1 .$msg2 .$msg3 .$msg4;
+	$msg .= ($h > 0) ? $h .' hour' : '';
+	$msg .= ($h > 1) ? 's' : '';
+	$msg .= ($min > 0) ? ' ' .$min .' minute' : '';
+	$msg .= ($min > 1) ? 's' : '';
+
+	return $msg;
 }
 
 class WalkinController extends Controller
