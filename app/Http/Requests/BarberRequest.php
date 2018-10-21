@@ -24,7 +24,7 @@ class BarberRequest extends FormRequest
     public function rules()
     {
         return [
-			  'name' => 'required|string|max:100',
+			  'name' => 'required|string|min:2|max:100',
 			  'address' => 'required|string|max:255',
 			  'email' => 'required|regex:/^.+@.+$/i',
 			  'phone' => 'required|regex:/^[0-9]{3}(-)?[0-9]{3}(-)?[0-9]{4}$/',

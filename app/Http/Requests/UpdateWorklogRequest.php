@@ -24,7 +24,7 @@ class UpdateWorklogRequest extends FormRequest
     public function rules()
     {
         return [
-			  'email' => 'required|regex:/^.+@.+$/i',
+			  'barber_name' => 'required|string|min:2|max:100',
         ];
     }
 }

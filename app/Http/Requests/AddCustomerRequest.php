@@ -24,7 +24,7 @@ class AddCustomerRequest extends FormRequest
     public function rules()
     {
         return [
-			  'name' => 'required|string|min:2|max:100',
+			  'customer_name' => 'required|string|min:2|max:100',
 			  'service' => 'required',
         ];
     }
