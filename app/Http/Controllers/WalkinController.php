@@ -11,19 +11,51 @@ use App\Worklog;
 
 use Illuminate\Http\Request;
 
-public function findMinAndReplace(&$arr, $num) {
+
+/**
+ * find the array element with the smallest value
+ * and add the second parameter to that array element
+ *
+ * @param $arr (passed by reference)
+ * @param $num
+ * @return mixed (the smallest value in the array)
+ */
+function findMinAndReplace(&$arr, $num) {
 	$min = min($arr);
 	$index = array_search($min, $arr);
 	$arr[$index] += $num;
+
 	return $min;
 }
 
-public function parseTime($tm) {
+/**
+ * the first array contains values that each of the currently working barbers
+ * needs to finish serving his/her customer
+ *
+ * @param $arr1 (passed by reference)
+ * @param $arr2 (passed by value)
+ * @return int|mixed
+ */
+function estimate(&$arr1, $arr2) {
+	$wt = 0;
+	for ($i = 0; $i < count($arr2); $i++ ) {
+		$wt = findMinAndReplace($arr1, $arr2[$i]);
+	}
+	return $wt;
+}
+
+/**
+ * create the correct message for the time in hours and minutes
+ *
+ * @param $tm
+ * @return string
+ */
+function parseTime($tm) {
 	$h = floor($tm / 60);
 	$min = $tm % 60;
 
 	$msg1 = ($h > 0) ? $h .' hour' : '';
-	$msg2 = ($h>1) ? 's' : '';
+	$msg2 = ($h > 1) ? 's' : '';
 	$msg3 = ($min > 0) ? ' ' .$min .' minute' : '';
 	$msg4 = ($min > 1) ? 's' : '';
 
@@ -74,6 +106,7 @@ class WalkinController extends Controller
 
 		// get the array of 'walkins' service times
 		$queue = Walkin::all()->orderBy('created_at', 'DESC')->get();
+
 		$st = [];
 		for ($i = 0; $i < count($queue); $i++ ) {
 			$st[$i] = $queue[$i]['service_time'];
