@@ -26,7 +26,7 @@ class WorklogController extends Controller
 		 $barberId = $barber->id;
 
 		 // check if there is any customers in the waitlist
-		 if (Walkin::all->isEmpty()) {
+		 if (Walkin::all()->isEmpty()) {
 		 	$flash_message = 'The waitlist is currently empty.';
 		 }
 
