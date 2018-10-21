@@ -27,4 +27,16 @@ class Walkin extends Model
 
     	$this->attributes['service_time'] = (int)$services[$this->attributes['service']];
 	 }
+
+	/**
+	 * create a query for records that updated earlier than $currTime
+	 *
+	 * @param $query
+	 * @param $currTime
+	 * @return mixed
+	 */
+	public function scopeBefore($query, $currTime) {
+		return $query->where('updated_at', '<=', $currTime);
+	}
+
 }
