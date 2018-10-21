@@ -32,7 +32,7 @@ class BarbersController extends Controller
 			 $barber->user_id = Auth::user()->id;
 
 			 $barber->save();
-			 flash('Your profile has been created.')->success();
+			 flash('Your profile has been created.')->success()->important();
 		 }
 
 		 return redirect('barbers');
@@ -55,9 +55,9 @@ class BarbersController extends Controller
 			$barber->phone = $request->input('phone');
 
 			$barber->save();
-			flash('Your profile has been updated.')->success();
+			flash('Your profile has been updated.')->success()->important();
 		} else {
-			flash('Something went wrong! Your profile has not been updated.')->error();
+			flash('Something went wrong! Your profile has not been updated.')->error()->important();
 
 		}
 
