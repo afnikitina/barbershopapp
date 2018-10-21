@@ -81,9 +81,9 @@ class WalkinController extends Controller
 		// current time
 		$currTime = Carbon::now();
 		// start of business time
-		$sobTime = Carbon::createFromTime(7, 0, 0, 'America/Denver');
+		$sobTime = Carbon::createFromTime(7, 0, 0);
 		// end of business day
-		$eobTime = Carbon::createFromTime(19, 0, 0, 'America/Denver');
+		$eobTime = Carbon::createFromTime(19, 0, 0);
 
 		//determine if the current customer is the first today, if so, clean the waitlist from the previous day
 		if ($currTime->lessThan($sobTime) && $currTime->greaterThanOrEqualTo($eobTime)) {
@@ -95,10 +95,11 @@ class WalkinController extends Controller
 			$walkin->setServiceTimeAttribute();
 
 			// get the latest record from the walkins table
-			$results = Walkin::latest('updated_at')->first();
+			$result = Walkin::all()->sortBy('updated_at')->first();
+			/*dd($result->updated_at);*/
 
 			// check if the current customer is the first in line today
-			if ($walkin->updated_at->diffInHours($results->updated_at) > 12 ) {
+			if ($result && $currTime->diffInHours($result->updated_at) > 12 ) {
 				// clean up the table before saving the current customer
 				Walkin::truncate();
 			}
@@ -110,6 +111,7 @@ class WalkinController extends Controller
 			if ($workstations->count()) {
 				$timeArr = [];
 				foreach($workstations as $workstation)
+					/*dd($workstation->updated_at);*/
 					array_push($timeArr, $workstation->updated_at);
 
 				// transform the timestamps into the number of minutes between service start time and now
@@ -120,8 +122,7 @@ class WalkinController extends Controller
 			}
 
 			// get the array of 'walkins' service times
-			$queue = Walkin::oldest('updated_at')->get();
-			//$queue = Walkin::all()->orderBy('created_at', 'DESC')->get();
+			$queue = Walkin::all()->sortBy('updated_at');
 
 			$st = [];
 			$length = count($queue);
@@ -138,7 +139,8 @@ class WalkinController extends Controller
 				.'Please come by tomorrow. Our barber shop is open from 7 am to 7 pm every day.';
 		}
 
-		return redirect('walkins')->with([
-			'flash_message' => $flash_message ]);
+		flash($flash_message)->success()->important();
+
+		return redirect('walkins');
 	}
 }
