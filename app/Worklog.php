@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Worklog extends Model
 {
 	protected $fillable = [
-		'name'
+		'barber_name'
 	];
 }
