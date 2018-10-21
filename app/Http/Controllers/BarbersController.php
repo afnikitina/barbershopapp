@@ -61,11 +61,16 @@ class BarbersController extends Controller
 
 			$barber->save();
 
-			session()->flash('message', 'Your profile has been updated.');
+			$flash_message = 'Your profile has been updated.';
+
+			//session()->flash('flash_message', 'Your profile has been updated.');
 		} else {
-			session()->flash('message', 'Something went wrong! Your profile has not been updated.');
+			$flash_message = 'Something went wrong! Your profile has not been updated.';
+
+			//session()->flash('flash_message', 'Something went wrong! Your profile has not been updated.');
 		}
 
-    	return redirect('barbers');
+    	return redirect('barbers')->with([
+			'flash_message' => $flash_message ]);
 	 }
 }
