@@ -85,18 +85,12 @@
         </nav>
 
         <main class="container mt-5 py-4">
-
-            @if (Session::has('flash_message'))
-                <div class="row justify-content-md-center">
-                    <div class="form-group col-md-6">
-                        <div class="aler alert-success p-3">
-                            {{ Session::get('message') }}
-                        </div>
-                    </div>
+            <div class="row justify-content-md-center">
+                <div class="form-group col-md-6">
+                    @include('flash::message')
                 </div>
-            @endif
-
-                @yield('content')
+            </div>
+            @yield('content')
         </main>
     </div>
 </body>
