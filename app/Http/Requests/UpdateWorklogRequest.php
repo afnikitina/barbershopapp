@@ -13,7 +13,6 @@ class UpdateWorklogRequest extends FormRequest
      */
     public function authorize()
     {
-    	// setting this return value to true temporarily (should be false)
         return true;
     }
 
