@@ -9,8 +9,8 @@
             {!! Form::open(['url' => 'walkins'], ['class' => 'form']) !!}
             <div class="row justify-content-md-center">
                 <div class="form-group col-md-6">
-                    {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
-                    {!! Form::text('name', null,
+                    {!! Form::label('customer_name', 'Name', ['class' => 'control-label']) !!}
+                    {!! Form::text('customer_name', null,
                         [
                             'class' => 'form-control',
                             'placeholder' => 'Enter Your Name'
@@ -40,11 +40,6 @@
             <div class="row justify-content-md-center">
                 <div class="col-md-6">
                     @include('errors.list')
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="alert alert-success col-md-6">
-                    <p>Your estimate waiting time is 50 minutes</p>
                 </div>
             </div>
         </div>
