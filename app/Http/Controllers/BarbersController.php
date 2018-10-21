@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BarberRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-
 use App\Barber;
 
 
@@ -36,10 +32,9 @@ class BarbersController extends Controller
 			 $barber->user_id = Auth::user()->id;
 
 			 $barber->save();
-
-			 session()->flash('message', 'Your profile has been created.');
+			 flash('Your profile has been created.')->success();
 		 }
-		 
+
 		 return redirect('barbers');
 	 }
 
@@ -60,17 +55,12 @@ class BarbersController extends Controller
 			$barber->phone = $request->input('phone');
 
 			$barber->save();
-
-			$flash_message = 'Your profile has been updated.';
-
-			//session()->flash('flash_message', 'Your profile has been updated.');
+			flash('Your profile has been updated.')->success();
 		} else {
-			$flash_message = 'Something went wrong! Your profile has not been updated.';
+			flash('Something went wrong! Your profile has not been updated.')->error();
 
-			//session()->flash('flash_message', 'Something went wrong! Your profile has not been updated.');
 		}
 
-    	return redirect('barbers')->with([
-			'flash_message' => $flash_message ]);
+    	return redirect('barbers');
 	 }
 }
