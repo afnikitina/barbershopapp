@@ -72,53 +72,47 @@ class WalkinController extends Controller
 		return view('walkins.create');
 	}
 
-	/**
-	 * This is a helper function to find a minimum value in the array,
-	 * replace this value with a sum of it and a value of the second argument and return the minimum
-	 *
-	 * @param $arr
-	 * @param $num
-	 * @return mixed
-	 */
-	}
-
-	protected $sobTime = Carbon::createFromTime(7, 0, 0, 'America/Denver');
-	protected $eobTime = Carbon::createFromTime(19, 0, 0, 'America/Denver');
-
 	public function calculateWaitingTime() {
+		// end of business day
+		//$sobTime = Carbon::createFromTime(7, 0, 0, 'America/Denver');
+		// start of business day
+		$eobTime = Carbon::createFromTime(19, 0, 0, 'America/Denver');
 		// current time
 		$currTime = Carbon::now();
 
-		// get all records from worklog
+		// get all records from the worklog
 		$workstations = Worklog::all();
 
-		// if none barbers are working, return -1 and exit from the function, waiting time is infinity
-		if (!$workstations->count()) {
-			return -1;
+		if ($workstations->count()) {
+			$timeArr = [];
+			foreach($workstations as $workstation)
+				array_push($timeArr, $workstation->updated_at);
+
+			// transform the timestamps into the number of minutes between service start time and now
+			foreach($timeArr as &$currTms) $currTms = $currTime->diffInMinutes($currTms);
+		} else {
+			// if none barbers are working, initialize the array that corresponds to three barbers (default value)
+			$timeArr = [0,0,0];
 		}
 
-		$timeArr = [];
-		foreach ($workstations as $workstation)
-			array_push($timeArr, $workstation->updated_at);
-
-		// transform the timestamps into the number of minutes between service start time and now
-		foreach ($timeArr as &$currTms) $currTms = $currTime->diffInMinutes($currTms);
-
 		// get the array of 'walkins' service times
-		$queue = Walkin::all()->orderBy('created_at', 'DESC')->get();
+		$queue = Walkin::oldest('updated_at')->get();
+		//$queue = Walkin::all()->orderBy('created_at', 'DESC')->get();
 
 		$st = [];
-		for ($i = 0; $i < count($queue); $i++ ) {
+		$length = count($queue);
+		for($i = 0; $i < $length; $i++) {
 			$st[$i] = $queue[$i]['service_time'];
 		}
 
 		// calculate the current waiting time
-		$waitingTime = 0;
-		for ($i = 0; $i < count($queue); $i++ ) {
-			$waitingTime = findMinAndReplace($st, $waitingTime);
-		}
+		$waitingTime = estimate($timeArr, $st);
+		// check if the estimated waiting time plus the time of the required service ends up being after the business hours
+		$flash_message = ($currTime->addMinutes($waitingTime + $st[$length-1])->lessThan($eobTime)) ?
+			'Your expected waiting time is ' .parseTime($waitingTime) :
+			'We are sorry – there are no available timeslots left for today. '
+			.'Please come by tomorrow. Our barber shop is open from 7 am to 7 pm every day.';
 
-		$flash_message = 'Your estimated waiting time is ' .$parsedTime;
 		return redirect('walkins')->with([
 			'flash_message' => $flash_message ]);
 	}
