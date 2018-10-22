@@ -28,7 +28,6 @@ class BarbersController extends Controller
 	 public function store(BarberRequest $request) {
 		 if (Auth::check()) {
 			 $barber= new Barber($request->all());
-			 /*$barber->user_id = Auth::user()->getAuthIdentifier();*/
 			 $barber->user_id = Auth::user()->id;
 
 			 $barber->save();
