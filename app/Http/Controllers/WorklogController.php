@@ -46,7 +46,7 @@ class WorklogController extends Controller
 		 // get the next-in-line customer from the 'walkins' table
 		 $nextCustomer = Walkin::oldest('updated_at')->first();
 
-		 // remove all yesterday's records from the worklog table if any
+		 // remove all yesterday records from the worklog table if any
 		 $yesterday = Carbon::yesterday()->format('Y-m-d');
 		 Worklog::whereDate('updated_at', $yesterday)->delete();
 
