@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mysql2'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,6 +38,22 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
         ],
+
+		 'mysql2' => [
+			 'driver' => 'mysql',
+			 'host' => env('DB_HOST', 'us-cdbr-iron-east-01.cleardb.net'),
+			 'port' => env('DB_PORT', '3306'),
+			 'database' => env('DB_DATABASE', 'heroku_74a480c5aba27bd'),
+			 'username' => env('DB_USERNAME', 'b9f2cc803a0adb'),
+			 'password' => env('DB_PASSWORD', '8a44b5ae'),
+			 'unix_socket' => env('DB_SOCKET', ''),
+			 'charset' => 'utf8mb4',
+			 'collation' => 'utf8mb4_unicode_ci',
+			 'prefix' => '',
+			 'prefix_indexes' => true,
+			 'strict' => true,
+			 'engine' => null,
+		 ],
 
         'mysql' => [
             'driver' => 'mysql',
