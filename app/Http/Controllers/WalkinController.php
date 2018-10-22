@@ -86,9 +86,10 @@ class WalkinController extends Controller
 		$eobTime = Carbon::createFromTime(19, 0, 0);
 
 		//determine if the current customer is the first today, if so, clean the waitlist from the previous day
-		if ($currTime->lessThan($sobTime) && $currTime->greaterThanOrEqualTo($eobTime)) {
-			$flash_message = 'You can sign up for the walk-in service only during business hours. '
-				.'Our barber shop is open from 7 am to 7 pm every day. Thank you.';
+		if ($currTime->lessThan($sobTime) || $currTime->greaterThanOrEqualTo($eobTime)) {
+			flash('You can sign up for the walk-in service only during business hours. '
+				.'Our barber shop is open from 7 am to 7 pm every day. Thank you.')->error()->important();
+			return redirect('walkins');
 		} else {
 			// first add the new customer to the waitlist
 			$walkin = new Walkin($request->all());
@@ -137,13 +138,13 @@ class WalkinController extends Controller
 			// calculate the current waiting time
 			$waitingTime = estimate($timeArr, $st);
 			// check if the estimated waiting time plus the time of the required service ends up being after the business hours
-			$flash_message = ($currTime->addMinutes($waitingTime + $st[$length-1])->lessThan($eobTime)) ?
-				'Your expected waiting time is ' .parseTime($waitingTime) :
-				'We are sorry – there are no available timeslots left for today. '
-				.'Please come by tomorrow. Our barber shop is open from 7 am to 7 pm every day.';
+			if ($currTime->addMinutes($waitingTime + $st[$length-1])->lessThan($eobTime)) {
+				flash('Your expected waiting time is ' .parseTime($waitingTime))->success()->important();
+			} else {
+				flash('We are sorry – there are no available timeslots left for today. '
+					.'Please come by tomorrow. Our barber shop is open from 7 am to 7 pm every day.')->error()->important();
+			}
 		}
-
-		flash($flash_message)->success()->important();
 
 		return redirect('walkins');
 	}
