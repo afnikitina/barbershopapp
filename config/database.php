@@ -1,5 +1,7 @@
 <?php
 
+$url = parse_url(getenv("DATABASE_URL"));
+
 return [
 
     /*
@@ -13,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql2'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +41,7 @@ return [
             'prefix' => '',
         ],
 
-		 'mysql2' => [
+		 'mysql' => [
 			 'driver' => 'mysql',
 			 'host' => env('DB_HOST', 'us-cdbr-iron-east-01.cleardb.net'),
 			 'port' => env('DB_PORT', '3306'),
@@ -55,7 +57,7 @@ return [
 			 'engine' => null,
 		 ],
 
-        'mysql' => [
+        'mysql2' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
