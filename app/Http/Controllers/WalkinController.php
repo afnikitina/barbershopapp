@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\AddCustomerRequest;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-use App\Barber;
 use App\Walkin;
 use App\Worklog;
 
@@ -118,6 +116,10 @@ class WalkinController extends Controller
 
 				// transform the timestamps into the number of minutes between service start time and now
 				foreach($timeArr as &$currTms) $currTms = $currTime->diffInMinutes($currTms);
+				// if the array contains less than three elements, pad the array to the size of three
+				//(as a minimum, three barbers should work any day)
+				$timeArr = array_pad($timeArr, 3, 0);
+
 			} else {
 				// if none barbers are working, initialize the array that corresponds to three barbers (default value)
 				$timeArr = [0,0,0];
