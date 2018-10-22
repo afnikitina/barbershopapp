@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use App\Barber;
 use App\Walkin;
 use App\Worklog;
@@ -45,6 +46,10 @@ class WorklogController extends Controller
 		 // get the next-in-line customer from the 'walkins' table
 		 $nextCustomer = Walkin::oldest('updated_at')->first();
 
+		 // remove all yesterday's records from the worklog table if any
+		 $yesterday = Carbon::yesterday()->format('Y-m-d');
+		 Worklog::whereDate('updated_at', $yesterday)->delete();
+
 		 // check if the current barber already has a record in the today's worklog
 		 if (Worklog::find($barber->id)) {
 			 $record = Worklog::find($barber->id)->first();
@@ -62,7 +67,7 @@ class WorklogController extends Controller
 		 // create a flash message
 		 $flash_message = 'Hi ' .$barber->name .'!'
 			 .' Your next customer, ' .$nextCustomer->customer_name .', needs ' .$nextCustomer->service
-			 .' The approximate service time is ' .$record->service_time .' minutes';
+			 .' The approximate service time is ' .$record->service_time .' minutes.';
 
 
 		 // delete the first-in-line customer from the queue (walkins table)
