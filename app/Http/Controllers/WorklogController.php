@@ -21,7 +21,33 @@ class WorklogController extends Controller
 	}
 
     public function startService() {
-		 // get the employee id of the currently logged barber
+
+		 if (! Auth::check()) {
+			 flash( 'Please login to your account.')->warning()->important();
+			 return view('login');
+		 }
+
+		 // check if the current user has a record as a barber, if not, force him/her to create his/her account
+		 $user = Auth::user();
+		 $barber = Barber::where('user_id', '=', $user->id)->first();
+		 if (!$barber) {
+			 flash('Hello ' .$user->name .'! Please create your account.')->warning()->important();
+			 return view('barbers.create');
+		 }
+
+
+		 /*$barber = Barber::where('user_id', '=', $user->id)->first();*/
+		 /*$barber = Barber::first(['user_id' => $user->id]);*/
+
+		/* if (!$barber) {
+			 flash('Hello ' .$user->name .'! Please create your account.')->warning()->important();
+			 return view('barbers.create');
+		 }*/
+
+		 /*if (Auth::check()) {
+			 $barber= new Barber($request->all());
+			 $barber->user_id = Auth::user()->id;*/
+
 		 $barber = Barber::find(Auth::user());
 		 $barberId = $barber->id;
 
@@ -56,7 +82,6 @@ class WorklogController extends Controller
 		 // delete the first-in-line customer from the queue (walkins table)
 		 $nextCustomer->delete();
 
-		 return view('worklog.index')->with([
-		 	'flash_message' => $flash_message ]);
+		 return view('worklog.index');
 	 }
 }
