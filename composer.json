@@ -50,7 +50,7 @@
             "@php artisan key:generate --ansi"
         ],
         "post-autoload-dump": [
-            /*"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",*/
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ]
     },
