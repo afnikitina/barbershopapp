@@ -49,15 +49,20 @@ function estimate(&$arr1, $arr2) {
  * @return string
  */
 function parseTime($tm) {
-	$h = floor($tm / 60);
-	$min = $tm % 60;
+	if (!$tm) {
+		$msg = '0 minutes. One of our barbers will be right with you!';
 
-	$msg = '';
+	} else {
+		$h = floor($tm / 60);
+		$min = $tm % 60;
 
-	$msg .= ($h > 0) ? $h .' hour' : '';
-	$msg .= ($h > 1) ? 's' : '';
-	$msg .= ($min > 0) ? ' ' .$min .' minute' : '';
-	$msg .= ($min > 1) ? 's' : '';
+		$msg = '';
+
+		$msg .= ($h > 0) ? $h .' hour' : '';
+		$msg .= ($h > 1) ? 's' : '';
+		$msg .= ($min > 0) ? ' ' .$min .' minute' : '';
+		$msg .= ($min > 1) ? 's' : '';
+	}
 
 	return $msg;
 }
@@ -116,7 +121,9 @@ class WalkinController extends Controller
 					array_push($timeArr, $workstation->updated_at);
 
 				// transform the timestamps into the number of minutes between service start time and now
-				foreach($timeArr as &$currTms) $currTms = $currTime->diffInMinutes($currTms);
+				// address the case when $currTms is negative
+				foreach($timeArr as &$currTms)
+					$currTms = ($currTime->diffInMinutes($currTms) > 0 ? $currTime->diffInMinutes($currTms) : 0 );
 				// if the array contains less than three elements, pad the array to the size of three
 				//(as a minimum, three barbers should work any day)
 				$timeArr = array_pad($timeArr, 3, 0);

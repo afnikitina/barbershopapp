@@ -45,6 +45,9 @@ class WorklogController extends Controller
 		 $nextCustomer = Walkin::oldest('updated_at')->first();
 
 		 // remove all yesterday records from the worklog table if any
+		 //TODO: instead of yesterday, use diffHours > 12
+		 // something like this:
+		 // if ($result && $currTime->diffInHours($result->updated_at) > 12 ) {}
 		 $yesterday = Carbon::yesterday()->format('Y-m-d');
 		 Worklog::whereDate('updated_at', $yesterday)->delete();
 
